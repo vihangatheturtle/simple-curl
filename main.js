@@ -45,7 +45,6 @@ function main(url, options, cb) {
 		var setCookieJar = {}
 		var headersFormatted = {}
 		var methodRes = {}
-		
 		for (i=0; i<headersNoHTTP.split('\n').length; i++) {
 			key = headersNoHTTP.split('\n')[i].split(': ')[0].split('-').join('')
 			val = headersNoHTTP.split('\n')[i].split(': ')[1]
@@ -57,7 +56,6 @@ function main(url, options, cb) {
 				}
 			}
 		}
-		
 		headersFormatted['SetCookie'] = setCookieJar
 		headersFormatted['Status'] = resCodeStatus
 		methodRes['headers'] = headersFormatted
