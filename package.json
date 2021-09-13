@@ -1,6 +1,6 @@
 {
   "name": "simple-curl",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "A simple fetch-like CURL wrapper for NodeJS.",
   "main": "main.js",
   "scripts": {
