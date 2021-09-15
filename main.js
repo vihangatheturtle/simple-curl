@@ -11,7 +11,7 @@ function main(url, options, cb) {
 	} catch { }
 	cmdname = 'curl-win.exe'
 	if (process.platform != 'win32') {
-		cmdname = 'curl-linux'
+		cmdname = 'curl'
 	}
 	cmdBldr = [__dirname + '\\' + cmdname];
 	cmdBldr.push('"' + url + '"')
