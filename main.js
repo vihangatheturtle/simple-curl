@@ -1,6 +1,8 @@
 const { exec } = require("child_process");
+const fs = require('fs');
 
 function main(url, options, cb) {
+	
 	if (typeof options == "function") {
 		cb = options;
 	}
@@ -13,7 +15,11 @@ function main(url, options, cb) {
 	if (process.platform != 'win32') {
 		cmdname = 'curl'
 	}
-	cmdBldr = [__dirname + '\\' + cmdname];
+	scmd = __dirname + '\\' + cmdname
+	if (!fs.existsSync(__dirname + '\\' + cmdname)) {
+		scmd = 'curl'
+	}
+	cmdBldr = [scmd];
 	cmdBldr.push('"' + url + '"')
 	if (vop) {
 		if (options["headers"]) {
