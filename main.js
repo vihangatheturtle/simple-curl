@@ -10,7 +10,7 @@ function main(url, options, cb) {
 		vop = true;
 	} catch { }
 	cmdname = 'curl'
-	if (process.platform != 'win32') {
+	if (process.platform == 'win32') {
 		cmdname = 'curl-win.exe'
 	}
 	cmdBldr = [__dirname + '\\' + cmdname];
