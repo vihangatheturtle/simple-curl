@@ -9,9 +9,9 @@ function main(url, options, cb) {
 		_ = JSON.stringify(options)
 		vop = true;
 	} catch { }
-	cmdname = 'curl-win.exe'
+	cmdname = 'curl'
 	if (process.platform != 'win32') {
-		cmdname = 'curl'
+		cmdname = 'curl-win.exe'
 	}
 	cmdBldr = [__dirname + '\\' + cmdname];
 	cmdBldr.push('"' + url + '"')
