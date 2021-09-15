@@ -1,6 +1,7 @@
 const { exec } = require("child_process");
 
 function main(url, options, cb) {
+console.log(__dirname)
 	if (typeof options == "function") {
 		cb = options;
 	}
