@@ -9,7 +9,11 @@ function main(url, options, cb) {
 		_ = JSON.stringify(options)
 		vop = true;
 	} catch { }
-	cmdBldr = [__dirname + '\\curl'];
+	cmdname = 'curl-win.exe'
+	if (process.platform != 'win32') {
+		cmdname = 'curl-linux'
+	}
+	cmdBldr = [__dirname + '\\' + cmdname];
 	cmdBldr.push('"' + url + '"')
 	if (vop) {
 		if (options["headers"]) {
