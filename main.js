@@ -1,7 +1,6 @@
 const { exec } = require("child_process");
 
 function main(url, options, cb) {
-console.log(__dirname)
 	if (typeof options == "function") {
 		cb = options;
 	}
@@ -10,7 +9,7 @@ console.log(__dirname)
 		_ = JSON.stringify(options)
 		vop = true;
 	} catch { }
-	cmdBldr = ['curl'];
+	cmdBldr = [__dirname + '\\curl'];
 	cmdBldr.push('"' + url + '"')
 	if (vop) {
 		if (options["headers"]) {
