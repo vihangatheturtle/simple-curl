@@ -1,14 +1,10 @@
 {
   "name": "simple-curl",
-  "version": "1.0.21",
+  "version": "1.0.15",
   "description": "A simple fetch-like CURL wrapper for NodeJS.",
   "main": "main.js",
   "scripts": {
-    "test": "node test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vihangatheturtle/simple-curl"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Cosmos Bots",
   "license": "ISC"
