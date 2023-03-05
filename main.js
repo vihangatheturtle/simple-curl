@@ -1,11 +1,19 @@
 const { exec } = require("child_process");
 const { PerformanceObserver, performance } = require('perf_hooks');
+const fs = require("fs");
+
+function sanitizeInput(d) {
+    d = d.split("$").join("")
+    d = d.split('"').join("")
+    return d
+}
 
 function main(url, options, cb) {
 	if (!url.startsWith("http")) return cb({
 		error: true,
 		message: "URL formatted incorrectly"
 	});
+    url = sanitizeInput(url)
 	if (typeof options == "function") {
 		cb = options;
 	}
@@ -14,14 +22,22 @@ function main(url, options, cb) {
 		_ = JSON.stringify(options)
 		vop = true;
 	} catch { }
-	cmdBldr = [__dirname + '\\curl'];
+    cmdname = 'curl-win.exe'
+	if (process.platform != 'win32') {
+		cmdname = 'curl'
+	}
+	scmd = __dirname + '\\' + cmdname
+	if (!fs.existsSync(__dirname + '\\' + cmdname)) {
+		scmd = 'curl'
+	}
+	cmdBldr = [scmd];
 	cmdBldr.push('"' + url + '"')
 	if (vop) {
 		try {
 			if (options["headers"]) {
 				for (i=0; i<Object.keys(options["headers"]).length; i++) {
-					key = Object.keys(options["headers"])[i]
-					val = options["headers"][Object.keys(options["headers"])[i]];
+					key = sanitizeInput(Object.keys(options["headers"])[i])
+					val = sanitizeInput(options["headers"][Object.keys(options["headers"])[i]]);
 					cmdBldr.push('-H "' + key + ': ' + val + '"')
 				}
 			}
@@ -40,12 +56,13 @@ function main(url, options, cb) {
 	if (!options['nohead'])
 		cmdBldr.push('-i')
 	cmdBldr.push('-X ' + options["method"])
-	//console.log(cmdBldr.join(' '))
+	console.log(cmdBldr.join(' '))
 	exec(cmdBldr.join(' '), (error, stdout, stderr) => {
 		if (!options['nohead']) {
 			var raw = stdout.split('\r').join('')
 			var resSpl = raw.split('\r').join('').split(/\n\s*\n/)
 			var offset = 0
+            console.log(resSpl)
 			if (resSpl[1].split('\n')[0].includes('HTTP/')) {
 				offset = 1
 			}
