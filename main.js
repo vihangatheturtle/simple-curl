@@ -2,6 +2,10 @@ const { exec } = require("child_process");
 const { PerformanceObserver, performance } = require('perf_hooks');
 
 function main(url, options, cb) {
+	if (!url.startsWith("http")) return cb({
+		error: true,
+		message: "URL formatted incorrectly"
+	});
 	if (typeof options == "function") {
 		cb = options;
 	}
